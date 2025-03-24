@@ -1,0 +1,38 @@
+<!doctype html>
+<html  lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zaved</title>
+  </head>
+  <body>
+    <div class="h-screen flex flex-col ">
+      <div class="header h-20 w-full bg-base-100 shadow-2xl">header</div>
+      <div class="flex justify-between">
+        <div class="join">
+          <button class="btn join-item p-1 bg-secondary text-secondary-content">Select Your file</button>
+          <h3 class="join-item bg-accent text-accent-content p-2 ">Directory</h3>
+   
+        </div>
+        <button class="btn bg-info text-info-content min-">Undo?</button>
+      </div>
+      <div class="bg-base-200 h-fill flex flex-col justify-end flex-1 mb-17">
+        <div class="chat chat-end">
+          <div class="chat-bubble chat-bubble-secondary">That's never been done in the history of the Jedi.</div>
+        </div>
+        <div class="chat chat-start">
+          <div class="chat-bubble chat-bubble-accent">That's never been done in the history of the Jedi.</div>
+        </div>
+      </div>
+    
+
+      <div class="bottom-5 fixed mt-30 w-svw mx-5  flex">
+        <input type="text" class="input grow bg-base-200 " placeholder="Type Your Query..">
+        <button class="btn text-primary-content bg-primary   w-fit join-item p-5 rounded-xl mr-10" onclick="sendMessage;" >Send</button>
+      </div>
+
+    </div>
+       
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
