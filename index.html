@@ -1,37 +1,96 @@
 <!doctype html>
-<html  lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>zaved</title>
   </head>
   <body>
-    <div class="h-screen flex flex-col ">
-      <div class="header h-20 w-full bg-base-100 shadow-2xl">header</div>
-      <div class="flex justify-between">
+    <div class="flex h-screen flex-col">
+      <div class="header bg-base-100 h-20 w-full shadow-2xl">header</div>
+      <div class="flex  flex-col justify-between px-5 py-2">
         <div class="join">
-          <button class="btn join-item p-1 bg-secondary text-secondary-content">Select Your file</button>
-          <h3 class="join-item bg-accent text-accent-content p-2 ">Directory</h3>
-   
+          <button class="btn join-item bg-secondary text-secondary-content p-1" onclick="sourceFileModal();">
+            Select Your Source file
+        </button>
+          <h3 class="join-item bg-accent text-accent-content p-2" id="selectedSourceFolder">Directory</h3>
         </div>
-        <button class="btn bg-info text-info-content min-">Undo?</button>
+        <div class="join">
+          <button class="btn join-item bg-secondary text-secondary-content p-1" onclick="outputFileModal();">
+            Select Your output file
+        </button>
+          <h3 class="join-item bg-accent text-accent-content p-2" id="selectedOutputFolder">Directory</h3>
+        </div>
+        <button class="btn bg-info text-info-content w-20">Undo?</button>
       </div>
-      <div id="scroller" class="bg-base-200 overflow-y-auto flex flex-col  flex-1 mb-16">
-        <div id='messageContainer'  class="flex flex-col p-4 mt-auto space-y-2">
-        <div  class="chat chat-end">
-          <div class="rounded-4xl chat-bubble chat-bubble-secondary">That's never been done in the history of the Jedi.</div>
+      <div
+        id="scroller"
+        class="bg-base-200 mb-16 flex flex-1 flex-col overflow-y-auto"
+      >
+        <div id="messageContainer" class="mt-auto flex flex-col space-y-2 p-4">
+          <div class="chat chat-end">
+            <div class="chat-bubble chat-bubble-secondary rounded-4xl">
+              That's never been done in the history of the Jedi.
+            </div>
+          </div>
         </div>
-        
+      </div>
+      <div class="right-5 bottom-20 left-5 mb-10 flex">
+        <input
+          id="textBox"
+          class="input bg-base-200 grow"
+          autocomplete="off"
+          placeholder="Type Your Query.."
+        />
+        <button
+          class="btn text-primary-content bg-primary join-item ml-2 w-fit rounded-xl p-5" id="sendButton" onclick="sendMessage()">
+          Send
+        </button>
+      </div>
     </div>
+    <dialog id="my_modal_1" class="modal">
+     
+    <div class="modal-box bg-base-100/10 backdrop-blur-xl rounded-4xl flex  items-center h-svh justify-center">
+      
+      <div class="bg-base-100 flex flex-col justify-between h-full max-h-10/12 outline-1 w-10/12 rounded-2xl">
+        <h1 class="text-primary  rounded-2xl overflow-x-scroll  grow " id="currentDir">D:\zaved\pythonprojects\web development\geminiFM\node_modules\</h1>
+        <div class="  flex justify-between items-end grow">
+        <button class="btn bg-secondary text-secondary-content grow" onclick="folderUp();">Folder up</button>
+        <form method="dialog">
+        <button class="btn bg-warning text-warning-content" onclick="selectThisFolder();">Select</button>
+        </form>
+      </div>
+        <div class="bg-base-200 h-10/12 overflow-auto w-full" id="foldersContainer">
+          <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div>
+          <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div> <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div> <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div> <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div> <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div> <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div> <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div> <div class="outline-1 p-2">
+            <button class="btn bg-primary text-primary-content">Folder 1</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+    </dialog>
     
-
-      <div class="bottom-5 fixed mt-30 w-svw mx-5  flex">
-        <input type="text" id="textbox" class="input grow bg-base-200 " placeholder="Type Your Query..">
-        <button class="btn text-primary-content bg-primary   w-fit join-item p-5 rounded-xl mr-10"  id="sendButton" >Send</button>
-      </div>
-
-    </div>
-       
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

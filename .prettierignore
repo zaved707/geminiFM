@@ -1,0 +1,19 @@
+
+# directories to ignore
+**/.git
+**/.svn
+**/.hg
+node_modules/
+.vscode/
+AI_file_manager_/
+# extentions to ignore
+*.css
+*.js
+*.exe
+
+# files to ignore
+daisyui.js
+package-lock.json
+package.json
+.prettierrc
+readme.md
