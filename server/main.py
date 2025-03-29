@@ -56,26 +56,49 @@ def dothething(source_dir, destination_dir,json_path,custom_prompt,mode):   #sou
     
 
         json_file= json.loads(response)
-        if os.path.exists(json_path):
-            print(f"The file '{json_path}' already exists. Deleting it...")
-        os.remove(json_path)  # Delete the file
+       
 
         
         files.organize_files(json_file,source_dir,destination_dir)
-        if os.path.exists(json_path):
-            os.remove(json_path)
-            
-        else:
-            print('cannot delete json, so appending the data')
-        try:    
-            with open(json_path, "w") as file:
-                    json.dump(json_file, file, indent=4)
-        except:
-            print('cannot append data to json')
-    print('response_type=',type(response),response)
+
+      
+
+    # Assume json_path is the directory, and we need to create a file in it
+        json_dir = json_path  # Directory where JSON files will be stored
+        base_filename = "jsonfile"  # Base name for the JSON file
+        extension = ".json"
+
+        # Ensure the directory exists
+        if not os.path.exists(json_dir):
+            os.makedirs(json_dir)
+
+        # Start with the base file path
+        file_path = os.path.join(json_dir, f"{base_filename}1{extension}")
+        counter = 2
+
+        # Check for existing files and increment the name if necessary
+        while os.path.exists(file_path):
+            print(f"The file '{file_path}' already exists. Creating a new one...")
+            file_path = os.path.join(json_dir, f"{base_filename}{counter}{extension}")
+            counter += 1
+
+        # Write the JSON data to the new file
+        try:
+            with open(file_path, "w") as file:
+                json.dump(json_file, file, indent=4)  # Assuming json_file is your data
+            print(f"Successfully created '{file_path}'")
+        except Exception as e:
+            print(f"Error writing to '{file_path}': {e}")
 
     return response
 
 
-def revert(json_file_path, source_dir, destination_dir):
-    files.organize_revert(json_file_path, source_dir, destination_dir)
+def revert( source_dir, destination_dir,json_folder_path,num):
+    if num==0:
+        for i in range(1,11):
+            files.organize_revert( source_dir, destination_dir, json_folder_path, i)
+    else:
+        files.organize_revert( source_dir, destination_dir, json_folder_path, num)
+print(os.getcwd())
+# dothething('testing','testing','history','according to type ','file manager')
+#revert('testing','testing','history',0)

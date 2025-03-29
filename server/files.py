@@ -37,7 +37,7 @@ def list_files(directory_path):
     files=[]
     count=0
     for f in source_dir.iterdir():
-        if count>100:
+        if count>10:
             break
         if f.is_file():
             files.append(f.name)
@@ -57,10 +57,12 @@ def organize_files(json_data, source_dir, destination_dir):
 
         if os.path.exists(source_file):
             shutil.move(source_file, destination_file)
-            print(f"Moved: {item['file_name']} -> {item['destination_folder']}")
+            # print(f"Moved: {item['file_name']} -> {item['destination_folder']}")
         else:
             print(f"File not found: {item['file_name']}")
-def organize_revert(json_file_path, source_dir, destination_dir):
+def organize_revert( source_dir, destination_dir,json_folder_path,num):
+    base_filename = "jsonfile"  # Adjust this if your base name differs
+    json_file_path = os.path.join(json_folder_path, f"{base_filename}{num}.json")
     with open(json_file_path, 'r') as file:
         json_data = json.load(file)
     for item in json_data:
@@ -73,7 +75,16 @@ def organize_revert(json_file_path, source_dir, destination_dir):
                 shutil.move(file, revert_dir)
         else:
             print('file does not exists...skipping')
+    try:
+        os.remove(json_file_path)
+        print(f"Deleted JSON file '{json_file_path}'")
+    except PermissionError as e:
+        print(f"PermissionError: Could not delete '{json_file_path}': {e}")
+    except Exception as e:
+        print(f"Error deleting '{json_file_path}': {e}")
     delete_empty_folders(destination_dir)
+
+
 def delete_empty_folders(source_dir):
     # Traverse the source_dir tree
     for root, dirs, files in os.walk(source_dir, topdown=False):

@@ -1,0 +1,4 @@
+- [ ] fix the value in selected directory. it takes the raw heading value as input which causes error with prettier.
+- [ ] implement chat mode and file manager mode
+- [ ] see the side bar opposite side moving weierdly when i open sidebar
+- [ ] add heading

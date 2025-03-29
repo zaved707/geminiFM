@@ -1,6 +1,10 @@
 import './style.css'
 import * as helper from "./print.js"
 
+import * as sendReq from "./sendReq.js"
+
+let currentModalDisplayFolder= "D:\\zaved\\pythonprojects\\web development\\geminiFM\\server\\testing\\";
+
 
 let pathType='';
 
@@ -9,21 +13,19 @@ window.selectFolder= function() {
 }
 window.selectThisFolder= function() {
     if (pathType=='source'){
-    const dir = document.getElementById('currentDir');
     const display=document.getElementById('selectedSourceFolder');
 
-    display.textContent=dir.textContent;
+    display.textContent=currentModalDisplayFolder;
     }
     else {
-        const dir = document.getElementById('currentDir');
         const display=document.getElementById('selectedOutputFolder');
     
-        display.textContent=dir.textContent; 
+        display.textContent=currentModalDisplayFolder; 
     }
 }
 window.getResponse =function(){
     const dataField= document.getElementById('textBox')
-    console.log(dataField.value)
+    // console.log(dataField.value)
     fetch('/api/getResponse',{
         method: 'POST',
         headers: {
@@ -33,12 +35,17 @@ window.getResponse =function(){
     })
 }
 
+function updateModalDirectoryDisplay() {
+    document.getElementById("currentDir").textContent = currentModalDisplayFolder;
+}
 
 
 window.folderAdd = function(folderSelected){
-    const dir = document.getElementById('currentDir');
-    console.log(dir.textContent);
-    dir.textContent = dir.textContent +  folderSelected + '\\' ;
+    // const dir = document.getElementById('currentDir');
+    // console.log(dir.textContent);
+    currentModalDisplayFolder = currentModalDisplayFolder +  folderSelected + '\\' ;
+   
+
     showFolder();
 }
 
@@ -46,7 +53,7 @@ window.folderAdd = function(folderSelected){
 
 
 window.showFolder= function() {
-    
+    updateModalDirectoryDisplay();
     helper.getData()
         .then(data => {
             // console.log('data received', data);
@@ -57,11 +64,13 @@ window.showFolder= function() {
         .catch(error => {
             console.error('Failed to show folder:', error);
         });
+    
 }
 
 window.folderUp =function(){
-    const dir = document.getElementById('currentDir');
-    dir.textContent= stripLastSegment(dir.textContent);
+    // const dir = document.getElementById('currentDir');
+    currentModalDisplayFolder = stripLastSegment(currentModalDisplayFolder);
+   
     showFolder();
 }
 
@@ -79,8 +88,15 @@ window.sendMessage =function(){
         </div>`;
 
     
-    console.log('button pressed',text)
+    // console.log('button pressed',text)
     scroller.scrollTop = scroller.scrollHeight
+    prompt=text;
+
+    const sourceDir =document.getElementById('selectedSourceFolder').textContent;
+
+    const outputDir =document.getElementById('selectedOutputFolder').textContent;
+
+    sendReq.sendPromptAndFilesToBackent(prompt,sourceDir,outputDir)
 }
 
 

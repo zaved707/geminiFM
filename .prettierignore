@@ -10,7 +10,7 @@ AI_file_manager_/
 *.css
 *.js
 *.exe
-
+*.json
 # files to ignore
 daisyui.js
 package-lock.json
