@@ -11,7 +11,7 @@
       <div class="drawer-content">
         <div class="flex h-screen flex-col">
           <div
-            class="header bg-base-100 mr-50 flex h-20 w-full items-center justify-between shadow-2xl lg:justify-end"
+            class="header bg-base-100 flex h-20 w-full items-center justify-between px-5 shadow-2xl lg:justify-end"
           >
             <div>
               <label
@@ -33,7 +33,15 @@
                 </svg>
               </label>
             </div>
-            <input type="checkbox" class="toggle mr-5" />
+            <div class="bg-info flex gap-2 rounded-2xl p-2">
+              <p id="modeDisplay" class="text-info-content"></p>
+              <input
+                id="modeCheckbox"
+                type="checkbox"
+                class="bg-info-content text-accent toggle"
+                onclick="toggleMade();"
+              />
+            </div>
           </div>
 
           <div
@@ -71,13 +79,13 @@
 
         <dialog id="my_modal_1" class="modal">
           <div
-            class="modal-box bg-base-100/10 flex size-1/2 h-svh items-center justify-center rounded-4xl backdrop-blur-xl"
+            class="modal-box bg-base-100/10 flex h-8/12 w-8/12 items-center justify-center rounded-4xl shadow-2xl backdrop-blur-xl"
           >
             <div
-              class="bg-base-100 flex h-full max-h-10/12 w-10/12 flex-col justify-between rounded-2xl outline-1"
+              class="bg-base-100 flex size-full flex-col justify-between rounded-2xl outline-1"
             >
               <h1
-                class="text-primary grow overflow-x-scroll rounded-2xl"
+                class="text-primary h-3/12 grow overflow-x-auto rounded-2xl pt-3 pl-3"
                 id="currentDir"
               ></h1>
               <div class="flex grow items-end justify-between">
@@ -97,7 +105,7 @@
                 </form>
               </div>
               <div
-                class="bg-base-200 h-10/12 w-full overflow-auto"
+                class="bg-base-200 h-10/12 w-full overflow-auto rounded-2xl"
                 id="foldersContainer"
               >
                 <div class="p-2 outline-1">

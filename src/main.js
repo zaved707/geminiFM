@@ -5,6 +5,25 @@ import * as sendReq from "./sendReq.js"
 
 let currentModalDisplayFolder= "D:\\zaved\\pythonprojects\\web development\\geminiFM\\server\\testing\\";
 
+let workingMode='file manager';
+// initialize of the toggle
+let modeDisplay=document.getElementById('modeDisplay')
+modeDisplay.textContent=workingMode;
+
+window.toggleMade= function(){
+    let modeToggle=document.getElementById('modeCheckbox').checked;
+    let modeDisplay=document.getElementById('modeDisplay')
+    if (modeToggle){
+        workingMode='chat'
+    }
+    else{
+        workingMode='file manager'
+    }
+    modeDisplay.textContent=workingMode;
+    console.log(modeToggle)
+
+
+}
 
 let pathType='';
 
@@ -78,6 +97,21 @@ window.folderUp =function(){
 
 console.log('script loaded')
 
+window.sendBotMessage= function(response){
+    let container=document.getElementById('messageContainer')
+    const scroller=document.getElementById('scroller');
+    container.innerHTML += `
+    <div class="chat chat-start">
+        <div class="rounded-4xl chat-bubble chat-bubble-primary">${response}</div>
+        </div>`;
+
+    
+    // console.log('button pressed',text)
+    scroller.scrollTop = scroller.scrollHeight
+    
+}
+
+
 window.sendMessage =function(){
     let text=document.getElementById('textBox').value
     let container=document.getElementById('messageContainer')
@@ -96,7 +130,12 @@ window.sendMessage =function(){
 
     const outputDir =document.getElementById('selectedOutputFolder').textContent;
 
-    sendReq.sendPromptAndFilesToBackent(prompt,sourceDir,outputDir)
+   sendReq.sendPromptAndFilesToBackend(prompt,sourceDir, outputDir, workingMode)
+   .then(data =>{
+        sendBotMessage(data);
+
+   }
+   )
 }
 
 

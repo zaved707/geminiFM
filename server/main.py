@@ -18,7 +18,7 @@ def chat(custom_prompt, GEMINI_API_KEY):
             'temperature': 0.5,
             
         })
-    print(response,'respose arrived')
+    # print(response.text,'respose arrived')
     return response.text
 
     

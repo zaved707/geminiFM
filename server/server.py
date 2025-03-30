@@ -12,19 +12,13 @@ CORS(app)
 def sendReq():
     data =request.get_json()
     print(data,'this is data')
+    workingMode = data.get('workingMode')
     prompt=data.get('prompt')
     source_dir = data.get('sourceDir')
     output_dir = data.get('outputDir')
-    main.dothething(source_dir,output_dir, 'history','according to type ','file manager')
-    response = {
-            'status': 'success',
-            'message': 'Data received',
-            'received_data': {
-                'prompt': prompt,
-                'sourceDir': source_dir,
-                'outputDir': output_dir
-            }
-        }
+    response=main.dothething(source_dir,output_dir, 'history', prompt ,workingMode)
+    
+    print(prompt,"thisis prompt")
     return jsonify(response), 200
     
    
